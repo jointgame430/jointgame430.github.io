@@ -11,6 +11,8 @@ This is a static web app designed to be hosted on GitHub Pages.
 - `underwear-roulette-config.json`: underwear types and materials
 - `weekly-challenge.html`: two-card weekly scratch challenge
 - `weekly-challenge-config.json`: weekly challenge prompts for husband and wife
+- `position-scratch-off.html`: random position scratch-off fed by CSV
+- `positions.csv`: position titles, links, and image URLs
 
 ## How it works
 
@@ -36,6 +38,14 @@ This is a static web app designed to be hosted on GitHub Pages.
 2. The page generates one scratch-off for `Husband` and one for `Wife`.
 3. Scratch each card to reveal the weekly challenge underneath.
 4. Click `New challenge` on either card to refresh just that one, or `Refresh both` to regenerate both.
+
+## Sex Position Scratch Off
+
+1. Open `Sex Position Scratch Off`.
+2. The page loads a random position from `positions.csv`.
+3. Scratch the card to reveal the position title and illustration.
+4. Click `Open position page` to visit the associated reference link.
+5. Click `New position` to generate another random pick.
 
 ## Deploying to GitHub Pages
 

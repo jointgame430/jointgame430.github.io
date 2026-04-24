@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sex Position Scratch Off</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="page-shell">
+    <section class="game-card">
+      <a class="back-link" href="index.html">Back to games</a>
+
+      <div class="section-heading">
+        <p class="eyebrow">Game 4</p>
+        <h1>Sex Position Scratch Off</h1>
+        <p class="hero-copy">
+          Scratch to reveal a random position from your CSV, including the title, illustration, and a direct link to the full page.
+        </p>
+      </div>
+
+      <section id="position-scratch-step" class="step-panel">
+        <div class="scratch-card-shell position-scratch-shell">
+          <div class="position-reveal">
+            <img id="position-image" class="position-image" alt="">
+            <h2 id="position-title" class="position-title"></h2>
+          </div>
+          <canvas
+            id="position-scratch-canvas"
+            class="scratch-canvas"
+            width="360"
+            height="360"
+            aria-label="Sex position scratch off area"
+          ></canvas>
+        </div>
+
+        <div class="action-row">
+          <a id="position-link-button" class="secondary-button button-link" href="#" target="_blank" rel="noopener noreferrer">Open position page</a>
+          <button id="position-reroll-button" class="primary-button" type="button">New position</button>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script type="module" src="position-scratch-off.js"></script>
+</body>
+</html>

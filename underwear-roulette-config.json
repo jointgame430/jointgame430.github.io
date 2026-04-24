@@ -5,24 +5,22 @@
   ],
   "underwearTypes": {
     "Husband": [
-      "Boxers",
-      "Boxer briefs",
-      "Briefs",
-      "Trunks"
+      "Thong",
+      "Brief",
+      "Trunk",
+      "Cheeky"
     ],
     "Wife": [
       "Thong",
       "Bikini",
-      "Boyshorts",
-      "High-cut briefs"
+      "Cheeky",
+      "Tanga",
+      "Lingerie"
     ]
   },
   "materials": [
     "Cotton",
     "Lace",
-    "Satin",
-    "Silk",
-    "Mesh",
-    "Modal"
+    "Seamless"
   ]
 }

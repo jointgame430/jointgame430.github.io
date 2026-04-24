@@ -114,6 +114,13 @@ h2 {
   font: inherit;
 }
 
+.button-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
 .game-button {
   display: flex;
   flex-direction: column;
@@ -345,6 +352,38 @@ h2 {
 
 .weekly-scratch-card {
   width: min(100%, 320px);
+}
+
+.position-scratch-shell {
+  width: min(100%, 520px);
+  aspect-ratio: 1 / 1;
+}
+
+.position-reveal {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 16px;
+  padding: 20px;
+  text-align: center;
+}
+
+.position-image {
+  width: min(100%, 320px);
+  max-height: 220px;
+  object-fit: contain;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 14px 34px rgba(24, 49, 43, 0.12);
+}
+
+.position-title {
+  margin: 0;
+  font-family: "Fraunces", serif;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  line-height: 1.1;
 }
 
 .hidden {
