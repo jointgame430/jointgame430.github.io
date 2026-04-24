@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scratch Off Challenge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="page-shell">
+    <section class="game-card">
+      <a class="back-link" href="index.html">Back to games</a>
+
+      <div class="section-heading">
+        <p class="eyebrow">Game 1</p>
+        <h1>Scratch Off Challenge</h1>
+        <p class="hero-copy">
+          Choose the player type and whether you are in or out, then scratch to reveal a random challenge from your config.
+        </p>
+      </div>
+
+      <section id="selection-step" class="step-panel">
+        <div class="option-group" data-group="relationship">
+          <h2>Who is playing?</h2>
+          <div class="option-row">
+            <button class="choice-chip" type="button" data-value="Husband">Husband</button>
+            <button class="choice-chip" type="button" data-value="Wife">Wife</button>
+            <button class="choice-chip" type="button" data-value="Joint">Joint</button>
+          </div>
+        </div>
+
+        <div class="option-group" data-group="status">
+          <h2>Pick one</h2>
+          <div class="option-row">
+            <button class="choice-chip" type="button" data-value="In">In</button>
+            <button class="choice-chip" type="button" data-value="Out">Out</button>
+          </div>
+        </div>
+
+        <button id="next-button" class="primary-button hidden" type="button">Next</button>
+      </section>
+
+      <section id="scratch-step" class="step-panel hidden">
+        <div class="selection-summary">
+          <span id="summary-text"></span>
+          <button id="change-selection" class="text-button" type="button">Change selection</button>
+        </div>
+
+        <div class="scratch-card-shell">
+          <div id="scratch-message" class="scratch-message" aria-live="polite"></div>
+          <canvas
+            id="scratch-canvas"
+            class="scratch-canvas"
+            width="320"
+            height="320"
+            aria-label="Scratch off area"
+          ></canvas>
+        </div>
+
+        <div class="action-row">
+          <button id="skip-button" class="secondary-button" type="button">Skip</button>
+          <button id="reset-button" class="primary-button" type="button">Start over</button>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script type="module" src="scratch-off.js"></script>
+</body>
+</html>

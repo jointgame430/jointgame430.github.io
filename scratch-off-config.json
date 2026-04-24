@@ -1,0 +1,38 @@
+{
+  "Husband": {
+    "In": [
+      "Plan the next date night and handle every detail.",
+      "Give a five-minute shoulder massage before bed.",
+      "Pick a dessert for tonight and go get it."
+    ],
+    "Out": [
+      "Choose the movie, no vetoes allowed.",
+      "Take over cleanup duty after the next meal.",
+      "Write a short appreciation note and deliver it today."
+    ]
+  },
+  "Wife": {
+    "In": [
+      "Pick the playlist for the evening.",
+      "Choose a surprise snack for both of you.",
+      "Call the next mini-adventure for the weekend."
+    ],
+    "Out": [
+      "Choose the next board game or card game.",
+      "Assign a fun two-minute challenge to your partner.",
+      "Pick the next takeout spot."
+    ]
+  },
+  "Joint": {
+    "In": [
+      "Pause everything and dance to one full song together.",
+      "Plan a one-hour screen-free hangout for this week.",
+      "Share one thing you each want to do this month."
+    ],
+    "Out": [
+      "Flip a coin to decide who picks the next activity.",
+      "Both send a kind text to someone you love.",
+      "Take a selfie together and save the moment."
+    ]
+  }
+}
