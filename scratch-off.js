@@ -3,6 +3,8 @@ const selectionState = {
   status: "",
 };
 
+const relationshipOptions = ["Husband", "Wife", "Joint"];
+
 const selectionStep = document.querySelector("#selection-step");
 const scratchStep = document.querySelector("#scratch-step");
 const nextButton = document.querySelector("#next-button");
@@ -17,6 +19,7 @@ const context = canvas.getContext("2d", { willReadFrequently: true });
 let promptConfig = {};
 let activePrompt = "";
 let activePointerId = null;
+let resolvedRelationship = "";
 const revealedPromptHistory = new Set();
 
 async function loadConfig() {
@@ -31,6 +34,7 @@ async function loadConfig() {
 function resetPromptHistory() {
   revealedPromptHistory.clear();
   activePrompt = "";
+  resolvedRelationship = "";
 }
 
 function wireSelectionButtons() {
@@ -64,14 +68,34 @@ function updateNextButtonVisibility() {
 }
 
 function getPromptPool() {
-  const relationshipOptions = promptConfig?.[selectionState.relationship];
-  const statusOptions = relationshipOptions?.[selectionState.status];
+  const selectedRelationship = resolvedRelationship || selectionState.relationship;
+  const status = selectionState.status;
+  const configuredRelationship = promptConfig?.[selectedRelationship]?.[status];
 
-  if (!Array.isArray(statusOptions) || statusOptions.length === 0) {
+  if (selectedRelationship === "Husband" || selectedRelationship === "Wife") {
+    const eitherOptions = promptConfig?.Either?.[status];
+    const combinedOptions = [
+      ...(Array.isArray(configuredRelationship) ? configuredRelationship : []),
+      ...(Array.isArray(eitherOptions) ? eitherOptions : []),
+    ];
+
+    return combinedOptions;
+  }
+
+  if (!Array.isArray(configuredRelationship) || configuredRelationship.length === 0) {
     return [];
   }
 
-  return statusOptions;
+  return configuredRelationship;
+}
+
+function chooseRelationship() {
+  if (selectionState.relationship === "Random") {
+    const randomIndex = Math.floor(Math.random() * relationshipOptions.length);
+    return relationshipOptions[randomIndex];
+  }
+
+  return selectionState.relationship;
 }
 
 function choosePrompt() {
@@ -139,6 +163,10 @@ function revealAt(clientX, clientY) {
 }
 
 function resetScratchCard() {
+  if (!resolvedRelationship) {
+    resolvedRelationship = chooseRelationship();
+  }
+
   activePrompt = choosePrompt();
   revealedPromptHistory.add(activePrompt);
   scratchMessage.textContent = activePrompt;
@@ -146,7 +174,8 @@ function resetScratchCard() {
 }
 
 function showScratchStep() {
-  summaryText.textContent = `${selectionState.relationship} / ${selectionState.status}`;
+  resolvedRelationship = chooseRelationship();
+  summaryText.textContent = `${resolvedRelationship} / ${selectionState.status}`;
   selectionStep.classList.add("hidden");
   scratchStep.classList.remove("hidden");
   resetScratchCard();

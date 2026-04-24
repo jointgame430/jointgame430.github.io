@@ -1,0 +1,28 @@
+{
+  "whoseUnderwear": [
+    "Husband",
+    "Wife"
+  ],
+  "underwearTypes": {
+    "Husband": [
+      "Boxers",
+      "Boxer briefs",
+      "Briefs",
+      "Trunks"
+    ],
+    "Wife": [
+      "Thong",
+      "Bikini",
+      "Boyshorts",
+      "High-cut briefs"
+    ]
+  },
+  "materials": [
+    "Cotton",
+    "Lace",
+    "Satin",
+    "Silk",
+    "Mesh",
+    "Modal"
+  ]
+}

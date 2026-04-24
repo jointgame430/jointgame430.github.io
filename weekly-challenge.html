@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weekly Challenge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="page-shell">
+    <section class="game-card">
+      <a class="back-link" href="index.html">Back to games</a>
+
+      <div class="section-heading">
+        <p class="eyebrow">Game 3</p>
+        <h1>Weekly Challenge</h1>
+        <p class="hero-copy">
+          Reveal one weekly challenge for the husband and one for the wife. Each scratch-off pulls from its own weekly challenge list.
+        </p>
+      </div>
+
+      <section id="weekly-challenge-step" class="step-panel">
+        <div class="weekly-grid">
+          <article class="weekly-card">
+            <div class="weekly-card__header">
+              <h2>Husband</h2>
+              <button class="text-button weekly-refresh" type="button" data-target="Husband">New challenge</button>
+            </div>
+
+            <div class="scratch-card-shell weekly-scratch-card">
+              <div id="weekly-message-husband" class="scratch-message" aria-live="polite"></div>
+              <canvas
+                id="weekly-canvas-husband"
+                class="scratch-canvas"
+                width="320"
+                height="320"
+                aria-label="Husband weekly challenge scratch off"
+              ></canvas>
+            </div>
+          </article>
+
+          <article class="weekly-card">
+            <div class="weekly-card__header">
+              <h2>Wife</h2>
+              <button class="text-button weekly-refresh" type="button" data-target="Wife">New challenge</button>
+            </div>
+
+            <div class="scratch-card-shell weekly-scratch-card">
+              <div id="weekly-message-wife" class="scratch-message" aria-live="polite"></div>
+              <canvas
+                id="weekly-canvas-wife"
+                class="scratch-canvas"
+                width="320"
+                height="320"
+                aria-label="Wife weekly challenge scratch off"
+              ></canvas>
+            </div>
+          </article>
+        </div>
+
+        <div class="action-row">
+          <button id="weekly-reroll-all" class="primary-button" type="button">Refresh both</button>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script type="module" src="weekly-challenge.js"></script>
+</body>
+</html>

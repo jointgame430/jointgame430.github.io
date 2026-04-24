@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Underwear Roulette</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="page-shell">
+    <section class="game-card">
+      <a class="back-link" href="index.html">Back to games</a>
+
+      <div class="section-heading">
+        <p class="eyebrow">Game 2</p>
+        <h1>Underwear Roulette</h1>
+        <p class="hero-copy">
+          Pick who is playing, then let the game randomly choose whose underwear, the type, and the material in sequence.
+        </p>
+      </div>
+
+      <section id="roulette-selection-step" class="step-panel">
+        <div class="option-group" data-group="player">
+          <h2>Who is playing?</h2>
+          <div class="option-row">
+            <button class="choice-chip" type="button" data-value="Husband">Husband</button>
+            <button class="choice-chip" type="button" data-value="Wife">Wife</button>
+          </div>
+        </div>
+
+        <button id="roulette-next-button" class="primary-button hidden" type="button">Spin</button>
+      </section>
+
+      <section id="roulette-result-step" class="step-panel hidden">
+        <div class="selection-summary">
+          <span id="roulette-summary-text"></span>
+          <button id="roulette-change-selection" class="text-button" type="button">Change selection</button>
+        </div>
+
+        <div class="roulette-results">
+          <div class="roulette-result-card">
+            <span class="roulette-label">Whose underwear</span>
+            <strong id="roulette-owner" class="roulette-value"></strong>
+          </div>
+          <div class="roulette-result-card">
+            <span class="roulette-label">Underwear type</span>
+            <strong id="roulette-type" class="roulette-value"></strong>
+          </div>
+          <div class="roulette-result-card">
+            <span class="roulette-label">Material</span>
+            <strong id="roulette-material" class="roulette-value"></strong>
+          </div>
+        </div>
+
+        <div class="action-row">
+          <button id="roulette-reroll-button" class="secondary-button" type="button">Reroll</button>
+          <button id="roulette-reset-button" class="primary-button" type="button">Start over</button>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script type="module" src="underwear-roulette.js"></script>
+</body>
+</html>
