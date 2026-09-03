@@ -1,7 +1,9 @@
 const rouletteState = {
   player: "",
+  primaryPlayer: "",
   primaryOwner: "",
   primaryType: null,
+  secondaryPlayer: "",
   secondaryOwner: "",
 };
 
@@ -92,24 +94,32 @@ function choosePrimaryOwner() {
   return chooseRandomEntry(rouletteConfig.whoseUnderwear);
 }
 
+function chooseJointPlayer() {
+  return chooseRandomEntry(rouletteConfig.whoseUnderwear);
+}
+
 function setupJointFollowUp() {
-  rouletteState.secondaryOwner = rouletteState.primaryOwner === "Husband" ? "Wife" : "Husband";
-  rouletteOtherButton.textContent = `Generate ${rouletteState.secondaryOwner}'s options`;
+  rouletteState.secondaryPlayer = rouletteState.primaryPlayer === "Husband" ? "Wife" : "Husband";
+  rouletteOtherButton.textContent = `Generate ${rouletteState.secondaryPlayer}'s options`;
   rouletteOtherButton.classList.remove("hidden");
   rouletteSecondaryResult.classList.add("hidden");
 }
 
 function generatePrimaryResult() {
+  rouletteState.primaryPlayer = rouletteState.player === "Joint"
+    ? chooseJointPlayer()
+    : rouletteState.player;
   rouletteState.primaryOwner = choosePrimaryOwner();
-  const result = generateOptions(rouletteState.primaryOwner, rouletteState.player);
+  const result = generateOptions(rouletteState.primaryOwner, rouletteState.primaryPlayer);
   rouletteState.primaryType = result.type;
   renderResult(result, "primary");
 }
 
 function generateSecondaryResult() {
+  rouletteState.secondaryOwner = choosePrimaryOwner();
   const result = generateOptions(
     rouletteState.secondaryOwner,
-    rouletteState.player,
+    rouletteState.secondaryPlayer,
     Number(rouletteState.primaryType?.score) || 0
   );
   renderResult(result, "secondary");
@@ -145,8 +155,10 @@ function showRouletteSelectionStep() {
 
 function resetRouletteSelections() {
   rouletteState.player = "";
+  rouletteState.primaryPlayer = "";
   rouletteState.primaryOwner = "";
   rouletteState.primaryType = null;
+  rouletteState.secondaryPlayer = "";
   rouletteState.secondaryOwner = "";
   document.querySelectorAll("[data-group='player'] .choice-chip").forEach((chip) => {
     chip.classList.remove("selected");
