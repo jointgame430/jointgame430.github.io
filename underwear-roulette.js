@@ -109,6 +109,7 @@ function generatePrimaryResult() {
   rouletteState.primaryPlayer = rouletteState.player === "Joint"
     ? chooseJointPlayer()
     : rouletteState.player;
+  rouletteSummaryText.textContent = `${rouletteState.primaryPlayer} is playing`;
   rouletteState.primaryOwner = choosePrimaryOwner();
   const result = generateOptions(rouletteState.primaryOwner, rouletteState.primaryPlayer);
   rouletteState.primaryType = result.type;
@@ -128,7 +129,6 @@ function generateSecondaryResult() {
 }
 
 function showRouletteResultStep() {
-  rouletteSummaryText.textContent = `${rouletteState.player} is playing`;
   rouletteSelectionStep.classList.add("hidden");
   rouletteResultStep.classList.remove("hidden");
   generatePrimaryResult();
