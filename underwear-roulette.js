@@ -71,8 +71,9 @@ function chooseType(owner, minimumScore = 0) {
   return chooseRandomEntry(eligibleOptions.length > 0 ? eligibleOptions : options);
 }
 
-function generateOptions(owner, minimumScore = 0) {
+function generateOptions(owner, player, minimumScore = 0) {
   return {
+    player,
     owner,
     type: chooseType(owner, minimumScore),
     material: chooseRandomEntry(rouletteConfig.materials),
@@ -80,10 +81,10 @@ function generateOptions(owner, minimumScore = 0) {
 }
 
 function renderResult(result, suffix) {
+  document.querySelector(`#roulette-player-${suffix}`).textContent = result.player || "Not configured";
   document.querySelector(`#roulette-owner-${suffix}`).textContent = result.owner || "Not configured";
   document.querySelector(`#roulette-type-${suffix}`).textContent = result.type?.name || "Not configured";
   document.querySelector(`#roulette-material-${suffix}`).textContent = result.material || "Not configured";
-  document.querySelector(`#roulette-${suffix === "primary" ? "primary" : "secondary"}-heading`).textContent = result.owner || "Result";
 }
 
 function choosePrimaryOwner() {
@@ -100,7 +101,7 @@ function setupJointFollowUp() {
 
 function generatePrimaryResult() {
   rouletteState.primaryOwner = choosePrimaryOwner();
-  const result = generateOptions(rouletteState.primaryOwner);
+  const result = generateOptions(rouletteState.primaryOwner, rouletteState.player);
   rouletteState.primaryType = result.type;
   renderResult(result, "primary");
 }
@@ -108,6 +109,7 @@ function generatePrimaryResult() {
 function generateSecondaryResult() {
   const result = generateOptions(
     rouletteState.secondaryOwner,
+    rouletteState.player,
     Number(rouletteState.primaryType?.score) || 0
   );
   renderResult(result, "secondary");
