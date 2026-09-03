@@ -28,6 +28,7 @@
           <div class="option-row">
             <button class="choice-chip" type="button" data-value="Husband">Husband</button>
             <button class="choice-chip" type="button" data-value="Wife">Wife</button>
+            <button class="choice-chip" type="button" data-value="Joint">Joint</button>
           </div>
         </div>
 
@@ -40,22 +41,29 @@
           <button id="roulette-change-selection" class="text-button" type="button">Change selection</button>
         </div>
 
-        <div class="roulette-results">
-          <div class="roulette-result-card">
+        <div id="roulette-results" class="roulette-results">
+          <div id="roulette-result-primary" class="roulette-result-card">
+            <span id="roulette-primary-heading" class="roulette-person-heading"></span>
             <span class="roulette-label">Whose underwear</span>
-            <strong id="roulette-owner" class="roulette-value"></strong>
-          </div>
-          <div class="roulette-result-card">
+            <strong id="roulette-owner-primary" class="roulette-value"></strong>
             <span class="roulette-label">Underwear type</span>
-            <strong id="roulette-type" class="roulette-value"></strong>
-          </div>
-          <div class="roulette-result-card">
+            <strong id="roulette-type-primary" class="roulette-value"></strong>
             <span class="roulette-label">Material</span>
-            <strong id="roulette-material" class="roulette-value"></strong>
+            <strong id="roulette-material-primary" class="roulette-value"></strong>
+          </div>
+          <div id="roulette-result-secondary" class="roulette-result-card hidden">
+            <span id="roulette-secondary-heading" class="roulette-person-heading"></span>
+            <span class="roulette-label">Whose underwear</span>
+            <strong id="roulette-owner-secondary" class="roulette-value"></strong>
+            <span class="roulette-label">Underwear type</span>
+            <strong id="roulette-type-secondary" class="roulette-value"></strong>
+            <span class="roulette-label">Material</span>
+            <strong id="roulette-material-secondary" class="roulette-value"></strong>
           </div>
         </div>
 
         <div class="action-row">
+          <button id="roulette-other-button" class="secondary-button hidden" type="button"></button>
           <button id="roulette-reroll-button" class="secondary-button" type="button">Reroll</button>
           <button id="roulette-reset-button" class="primary-button" type="button">Start over</button>
         </div>

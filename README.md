@@ -31,6 +31,7 @@ This is a static web app designed to be hosted on GitHub Pages.
 3. Click `Spin`.
 4. The game randomly chooses whose underwear, then a matching underwear type, then a material.
 5. Click `Reroll` for a new result or `Start over` to pick the player again.
+6. Choose `Joint` to generate one person first, then use the bottom button to generate the other person's options. The second underwear type will have the same or a higher revealingness score than the first.
 
 ## Weekly Challenge
 

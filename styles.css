@@ -314,6 +314,12 @@ h2 {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(244, 238, 228, 0.85));
 }
 
+.roulette-person-heading {
+  margin-bottom: 2px;
+  font-family: "Fraunces", serif;
+  font-size: 1.35rem;
+}
+
 .roulette-label {
   text-transform: uppercase;
   letter-spacing: 0.14em;

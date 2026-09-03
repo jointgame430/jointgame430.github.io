@@ -5,17 +5,19 @@
   ],
   "underwearTypes": {
     "Husband": [
-      "Thong",
-      "Brief",
-      "Trunk",
-      "Cheeky"
+      { "name": "Brief", "score": 2 },
+      { "name": "Trunk", "score": 1 },
+      { "name": "Cheeky", "score": 3 },
+      { "name": "Thong", "score": 4 },
+      { "name": "Commando", "score": 5}
     ],
     "Wife": [
-      "Thong",
-      "Bikini",
-      "Cheeky",
-      "Tanga",
-      "Lingerie"
+      { "name": "Bikini", "score": 1 },
+      { "name": "Cheeky", "score": 2 },
+      { "name": "Tanga", "score": 3 },
+      { "name": "Thong", "score": 4 },
+      { "name": "Lingerie", "score": 5 },
+      { "name": "Commando", "score": 5}
     ]
   },
   "materials": [

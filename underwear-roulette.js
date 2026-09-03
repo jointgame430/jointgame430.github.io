@@ -1,5 +1,8 @@
 const rouletteState = {
   player: "",
+  primaryOwner: "",
+  primaryType: null,
+  secondaryOwner: "",
 };
 
 const rouletteSelectionStep = document.querySelector("#roulette-selection-step");
@@ -7,9 +10,8 @@ const rouletteResultStep = document.querySelector("#roulette-result-step");
 const rouletteNextButton = document.querySelector("#roulette-next-button");
 const rouletteSummaryText = document.querySelector("#roulette-summary-text");
 const rouletteChangeSelectionButton = document.querySelector("#roulette-change-selection");
-const rouletteOwner = document.querySelector("#roulette-owner");
-const rouletteType = document.querySelector("#roulette-type");
-const rouletteMaterial = document.querySelector("#roulette-material");
+const rouletteSecondaryResult = document.querySelector("#roulette-result-secondary");
+const rouletteOtherButton = document.querySelector("#roulette-other-button");
 const rouletteRerollButton = document.querySelector("#roulette-reroll-button");
 const rouletteResetButton = document.querySelector("#roulette-reset-button");
 
@@ -26,7 +28,7 @@ async function loadRouletteConfig() {
 
 function chooseRandomEntry(entries) {
   if (!Array.isArray(entries) || entries.length === 0) {
-    return "";
+    return null;
   }
 
   const randomIndex = Math.floor(Math.random() * entries.length);
@@ -46,32 +48,95 @@ function wireRouletteSelectionButtons() {
       }
 
       rouletteState.player = button.dataset.value;
-
       group.querySelectorAll(".choice-chip").forEach((chip) => {
         chip.classList.toggle("selected", chip === button);
       });
-
       updateRouletteNextButton();
     });
   });
 }
 
-function generateRouletteResult() {
-  const whoseUnderwear = chooseRandomEntry(rouletteConfig.whoseUnderwear);
-  const typePool = rouletteConfig.underwearTypes?.[whoseUnderwear] ?? [];
-  const underwearType = chooseRandomEntry(typePool);
-  const material = chooseRandomEntry(rouletteConfig.materials);
+function getTypeOptions(owner) {
+  const options = rouletteConfig.underwearTypes?.[owner] ?? [];
 
-  rouletteOwner.textContent = whoseUnderwear || "Not configured";
-  rouletteType.textContent = underwearType || "Not configured";
-  rouletteMaterial.textContent = material || "Not configured";
+  // Support the old string format while configs are migrated to scored entries.
+  return options.map((option, index) => (
+    typeof option === "string" ? { name: option, score: index + 1 } : option
+  ));
+}
+
+function chooseType(owner, minimumScore = 0) {
+  const options = getTypeOptions(owner);
+  const eligibleOptions = options.filter((option) => Number(option.score) >= minimumScore);
+  return chooseRandomEntry(eligibleOptions.length > 0 ? eligibleOptions : options);
+}
+
+function generateOptions(owner, minimumScore = 0) {
+  return {
+    owner,
+    type: chooseType(owner, minimumScore),
+    material: chooseRandomEntry(rouletteConfig.materials),
+  };
+}
+
+function renderResult(result, suffix) {
+  document.querySelector(`#roulette-owner-${suffix}`).textContent = result.owner || "Not configured";
+  document.querySelector(`#roulette-type-${suffix}`).textContent = result.type?.name || "Not configured";
+  document.querySelector(`#roulette-material-${suffix}`).textContent = result.material || "Not configured";
+  document.querySelector(`#roulette-${suffix === "primary" ? "primary" : "secondary"}-heading`).textContent = result.owner || "Result";
+}
+
+function choosePrimaryOwner() {
+  if (rouletteState.player === "Joint") {
+    return chooseRandomEntry(rouletteConfig.whoseUnderwear);
+  }
+
+  return rouletteState.player;
+}
+
+function setupJointFollowUp() {
+  rouletteState.secondaryOwner = rouletteState.primaryOwner === "Husband" ? "Wife" : "Husband";
+  rouletteOtherButton.textContent = `Generate ${rouletteState.secondaryOwner}'s options`;
+  rouletteOtherButton.classList.remove("hidden");
+  rouletteSecondaryResult.classList.add("hidden");
+}
+
+function generatePrimaryResult() {
+  rouletteState.primaryOwner = choosePrimaryOwner();
+  const result = generateOptions(rouletteState.primaryOwner);
+  rouletteState.primaryType = result.type;
+  renderResult(result, "primary");
+}
+
+function generateSecondaryResult() {
+  const result = generateOptions(
+    rouletteState.secondaryOwner,
+    Number(rouletteState.primaryType?.score) || 0
+  );
+  renderResult(result, "secondary");
+  rouletteSecondaryResult.classList.remove("hidden");
+  rouletteOtherButton.classList.add("hidden");
 }
 
 function showRouletteResultStep() {
   rouletteSummaryText.textContent = `${rouletteState.player} is playing`;
   rouletteSelectionStep.classList.add("hidden");
   rouletteResultStep.classList.remove("hidden");
-  generateRouletteResult();
+  generatePrimaryResult();
+
+  if (rouletteState.player === "Joint") {
+    setupJointFollowUp();
+  } else {
+    rouletteOtherButton.classList.add("hidden");
+    rouletteSecondaryResult.classList.add("hidden");
+  }
+}
+
+function rerollRouletteResult() {
+  generatePrimaryResult();
+  if (rouletteState.player === "Joint") {
+    setupJointFollowUp();
+  }
 }
 
 function showRouletteSelectionStep() {
@@ -81,6 +146,9 @@ function showRouletteSelectionStep() {
 
 function resetRouletteSelections() {
   rouletteState.player = "";
+  rouletteState.primaryOwner = "";
+  rouletteState.primaryType = null;
+  rouletteState.secondaryOwner = "";
   document.querySelectorAll("[data-group='player'] .choice-chip").forEach((chip) => {
     chip.classList.remove("selected");
   });
@@ -91,7 +159,8 @@ function resetRouletteSelections() {
 function wireRouletteActions() {
   rouletteNextButton.addEventListener("click", showRouletteResultStep);
   rouletteChangeSelectionButton.addEventListener("click", showRouletteSelectionStep);
-  rouletteRerollButton.addEventListener("click", generateRouletteResult);
+  rouletteOtherButton.addEventListener("click", generateSecondaryResult);
+  rouletteRerollButton.addEventListener("click", rerollRouletteResult);
   rouletteResetButton.addEventListener("click", resetRouletteSelections);
 }
 
