@@ -87,11 +87,8 @@ function renderResult(result, suffix) {
 }
 
 function choosePrimaryOwner() {
-  if (rouletteState.player === "Joint") {
-    return chooseRandomEntry(rouletteConfig.whoseUnderwear);
-  }
-
-  return rouletteState.player;
+  // The selected player is the person playing, not necessarily whose underwear is chosen.
+  return chooseRandomEntry(rouletteConfig.whoseUnderwear);
 }
 
 function setupJointFollowUp() {
